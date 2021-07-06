@@ -1,151 +1,106 @@
 <template>
-  <div class="wrap"
-       id="wrap">
-    <div class="logGet">
-      <!-- 头部提示信息 -->
-      <div class="logD logDtip">
-        <p class="p1">登录</p>
-      </div>
-      <!-- 输入框 -->
-      <div class="lgD">
-        <input type="text"
-               placeholder="输入用户名" />
-      </div>
-      <div class="lgD">
-        <input type="text"
-               placeholder="输入用户密码" />
-      </div>
-      <div class="logC">
-        <a><button @click="login">登 录</button></a>
-      </div>
-    </div>
-  </div>
-</template>
 
+  <body id="poster">
+    <el-form :model="loginForm"
+             class="login-container"
+             label-position="left"
+             label-width="40px">
+      <h3 class="login_title">系统登录</h3>
+      <el-form-item label="用户">
+        <el-input type="text"
+                  prefix-icon="el-icon-user"
+                  v-model="loginForm.userName"
+                  auto-complete="off"
+                  placeholder="账号"></el-input>
+      </el-form-item>
+
+      <el-form-item label="密码">
+        <el-input type="password"
+                  prefix-icon="el-icon-key"
+                  v-model="loginForm.password"
+                  auto-complete="off"
+                  placeholder="密码"></el-input>
+      </el-form-item>
+
+      <el-form-item style="width: 100%">
+        <el-button type="primary"
+                   class="login-button-width"
+                   v-on:click="login">登陆账号</el-button>
+        <el-button type="text">
+          <router-link to="/register">注册账号</router-link>
+        </el-button>
+      </el-form-item>
+    </el-form>
+  </body>
+</template>
+ 
+ 
 <script>
+
 export default {
+  name: "Login",
+  data () {
+    return {
+      messages: [],
+      loginForm: {
+        userName: '',
+        password: ''
+      },
+    }
+  },
+
+
+
+
+
+  // 登陆
   methods: {
+    // 登陆
     login () {
       // 假设登陆成功，则跳转到 index 组件
-      this.$router.replace('/index');
+      this.$router.replace('/home');
     }
   }
+
+
 }
+
+
+
 </script>
-
+ 
 <style>
-body {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
+#poster {
+  background: url("./../../static/img/eva.jpg") no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  position: fixed;
 }
-
-* {
-  margin: 0;
+body {
+  margin: 0px;
   padding: 0;
 }
 
-#wrap {
-  height: 600px;
-  width: 100%;
-  background-position: center center;
-  position: relative;
+.login-container {
+  border-radius: 15px;
+  background-clip: padding-box;
+  margin: 120px auto;
+  width: 25%;
+  padding: 35px 35px 15px 35px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 0 25px #cac6c6;
 }
 
-#head {
-  height: 120px;
-  width: 100;
-  background-color: #66cccc;
+.login_title {
+  margin: 0px auto 40px auto;
   text-align: center;
-  position: relative;
+  color: #505458;
 }
 
-#wrap .logGet {
-  height: 408px;
-  width: 368px;
-  position: absolute;
-  background-color: #ffffff;
-  top: 100px;
-  right: 15%;
-}
-
-.logC a button {
+.login-button-width {
   width: 100%;
-  height: 45px;
-  background-color: #ee7700;
-  border: none;
-  color: white;
-  font-size: 18px;
-}
-
-.logGet .logD.logDtip .p1 {
-  display: inline-block;
-  font-size: 28px;
-  margin-top: 30px;
-  width: 86%;
-}
-
-#wrap .logGet .logD.logDtip {
-  width: 86%;
-  border-bottom: 1px solid #ee7700;
-  margin-bottom: 60px;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.logGet .lgD img {
-  position: absolute;
-  top: 12px;
-  left: 8px;
-}
-
-.logGet .lgD input {
-  width: 100%;
-  height: 42px;
-  text-indent: 2.5rem;
-}
-
-#wrap .logGet .lgD {
-  width: 86%;
-  position: relative;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-#wrap .logGet .logC {
-  width: 86%;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-bottom: 0px;
-  margin-left: auto;
-}
-
-.title {
-  font-family: "宋体";
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* 使用css3的transform来实现 */
-  font-size: 36px;
-  height: 40px;
-  width: 30%;
-}
-
-.copyright {
-  font-family: "宋体";
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* 使用css3的transform来实现 */
-  height: 60px;
-  width: 40%;
-  text-align: center;
 }
 </style>
