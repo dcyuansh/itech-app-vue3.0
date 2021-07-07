@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Home from '../views/Home.vue'
 
 
 const routes = [
@@ -24,18 +25,13 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('../views/Home.vue'),
+    component: Home,
     children: [//二级路由
       {
-        path: '/one',
-        name: 'one',
-        component: () => import('../components/one.vue')
+        path: '/manage/user',
+        name: 'user',
+        component: () => import('../views/user/UserManage.vue')
       },
-      {
-        path: '/two',
-        name: 'two',
-        component: () => import('../components/two.vue')
-      }
     ]
   },
 

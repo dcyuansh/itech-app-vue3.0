@@ -1,0 +1,17 @@
+<template>
+  <el-footer>
+    <span> &copy; 2021 iTech| By De Chun Yuan </span>
+  </el-footer>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style>
+.el-footer {
+  text-align: center;
+  line-height: 30px;
+}
+</style>
