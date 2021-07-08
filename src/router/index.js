@@ -1,39 +1,86 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+//菜单
+import MenuIndex from '../views/MenuIndex.vue'
+//首页
 import Home from '../views/Home.vue'
+import Login from '../views/user/Login.vue'
+import Register from '../views/user/Register.vue'
+
+
 
 
 const routes = [
   //登录
   {
     path: '/',
-    name: 'Login',
+    name: 'login',
     component: Login,
     meta: {
-      title: '登录'
-    }
+      title: '登录',
+    },
   },
   //注册
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: Register,
-    //component: () => import('../views/Register.vue')
+    meta: {
+      title: '注册',
+    },
   },
+
   //首页
   {
     path: '/home',
     name: 'home',
-    component: Home,
-    children: [//二级路由
+    component: MenuIndex,
+    redirect: '/home',
+    meta: {
+      title: '首页',
+    },
+    children: [
+      {
+        path: '/home',
+        component: Home,
+        meta: {
+          title: '任务中心'
+        }
+      },
+
+    ]
+  },
+
+  //管理中心
+  {
+    path: '/manage',
+    name: 'manageUser',
+    component: MenuIndex,
+    redirect: '/manage/user',
+    meta: {
+      title: '管理中心',
+    },
+    children: [
+      //用户管理
       {
         path: '/manage/user',
-        name: 'user',
-        component: () => import('../views/user/UserManage.vue')
+        name: 'userManage',
+        component: () => import('../views/user/UserManage.vue'),
+        meta: {
+          title: '用户管理'
+        }
+      },
+      //角色管理
+      {
+        path: '/manage/role',
+        name: 'roleManage',
+        component: () => import('../views/user/RoleManage.vue'),
+        meta: {
+          title: '用户管理'
+        }
       },
     ]
   },
+
 
 
 ]
