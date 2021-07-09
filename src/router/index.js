@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-//菜单
+//索引菜单
 import MenuIndex from '../views/MenuIndex.vue'
+//import AsideMenuIndex from '../views/AsideMenuIndex.vue'
+
 //首页
 import Home from '../views/Home.vue'
 import Login from '../views/user/Login.vue'
 import Register from '../views/user/Register.vue'
 
+//管理中心模块
+const UserManage = () => import(/* webpackChunkName: "manage" */ '../views/user/UserManage.vue')
+const RoleManage = () => import(/* webpackChunkName: "manage" */ '../views/user/RoleManage.vue')
 
 
 
@@ -15,18 +20,15 @@ const routes = [
     path: '/',
     name: 'login',
     component: Login,
-    meta: {
-      title: '登录',
-    },
+    meta: { title: '登录', },
   },
+
   //注册
   {
     path: '/register',
     name: 'register',
     component: Register,
-    meta: {
-      title: '注册',
-    },
+    meta: { title: '注册', },
   },
 
   //首页
@@ -35,52 +37,40 @@ const routes = [
     name: 'home',
     component: MenuIndex,
     redirect: '/home',
-    meta: {
-      title: '首页',
-    },
+    meta: { title: '首页', },
     children: [
       {
         path: '/home',
         component: Home,
-        meta: {
-          title: '任务中心'
-        }
+        meta: { title: '首页' }
       },
-
     ]
   },
 
   //管理中心
   {
     path: '/manage',
-    name: 'manageUser',
+    name: 'manage',
     component: MenuIndex,
-    redirect: '/manage/user',
-    meta: {
-      title: '管理中心',
-    },
+    redirect: '/userManage',
+    meta: { title: '管理中心', },
     children: [
       //用户管理
       {
-        path: '/manage/user',
+        path: '/userManage',
         name: 'userManage',
-        component: () => import('../views/user/UserManage.vue'),
-        meta: {
-          title: '用户管理'
-        }
+        component: UserManage,
+        meta: { title: '用户管理' }
       },
       //角色管理
       {
-        path: '/manage/role',
+        path: '/roleManage',
         name: 'roleManage',
-        component: () => import('../views/user/RoleManage.vue'),
-        meta: {
-          title: '用户管理'
-        }
+        component: RoleManage,
+        meta: { title: '角色管理' }
       },
     ]
   },
-
 
 
 ]
