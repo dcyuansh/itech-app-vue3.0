@@ -71,7 +71,7 @@ export default {
  
 <style>
 #poster {
-  background: url("./../../static/img/eva.jpg") no-repeat;
+  background: url("./../../assets/eva.jpg") no-repeat;
   background-position: center;
   height: 100%;
   width: 100%;

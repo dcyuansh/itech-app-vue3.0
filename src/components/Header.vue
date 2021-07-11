@@ -8,7 +8,9 @@
            text-color="#fff"
            active-text-color="#ffd04b">
     <el-menu-item>iTech项目管理系统</el-menu-item>
+
     <el-menu-item index="/home"><i class="el-icon-menu"></i>首页</el-menu-item>
+
     <el-submenu index="manage">
       <template #title><i class="el-icon-s-tools"></i>管理中心</template>
       <el-menu-item index="/userManage">用户管理</el-menu-item>
@@ -20,22 +22,42 @@
         <el-menu-item index="/editPicture">图片编辑</el-menu-item>
       </el-submenu>
     </el-submenu>
+
+    <el-submenu index="logout"
+                style="float: right;">
+      <template #title><i class="el-icon-user-solid"></i>{{showlogin}}</template>
+      <el-menu-item index="/userInfo">个人中心</el-menu-item>
+      <el-menu-item @click="exit()">退出</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
 
 
 <script>
-export default {
 
+export default {
   data () {
     return {
+      showlogin: localStorage.getItem("username"),
     };
   },
   methods: {
     handleSelect (key, keyPath) {
       //console.log(key, keyPath);
+    },
+
+    exit () {
+      //1.清除标记的    
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("Authorization");
+      //2.怎么同步呢？         
+      this.showlogin = null;
+      //router.push({ path: '/', querry: { redirect: router.currentRoute.fullPath } })
+      this.$router.replace('/');
     }
+
+
   }
 }
 </script>

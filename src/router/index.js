@@ -6,7 +6,8 @@ import MenuIndex from '../views/MenuIndex.vue'
 //首页
 import Home from '../views/Home.vue'
 import Login from '../views/user/Login.vue'
-import Register from '../views/user/Register.vue'
+const Register = () => import(/* webpackChunkName: "register" */ '../views/user/Register.vue')
+
 
 //管理中心模块
 const UserManage = () => import(/* webpackChunkName: "manage" */ '../views/user/UserManage.vue')
