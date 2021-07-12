@@ -25,7 +25,7 @@
       <el-form-item style="width: 100%">
         <el-button type="primary"
                    class="login-button-width"
-                   v-on:click="login">登陆账号</el-button>
+                   v-on:click="handleLogin">登陆账号</el-button>
         <el-button type="text">
           <router-link to="/register">注册账号</router-link>
         </el-button>
@@ -36,6 +36,7 @@
  
  
 <script>
+import login from '../../utils/api'
 
 export default {
   name: "Login",
@@ -56,10 +57,20 @@ export default {
   // 登陆
   methods: {
     // 登陆
-    login () {
-      // 假设登陆成功，则跳转到 index 组件
-      this.$router.replace('/home');
+    handleLogin () {
+      login(this.loginForm)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            //localStorage
+            localStorage.setItem('username', res.data.userName)
+            localStorage.setItem('Authorization', res.data.token)
+            this.$router.push({ path: '/home', querry: { redirect: this.$router.currentRoute.fullPath } })
+          } else {
+            this.$router.push({ path: '/404' })
+          }
+        })
     }
+
   }
 
 

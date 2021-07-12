@@ -26,7 +26,7 @@
     <el-submenu index="logout"
                 style="float: right;">
       <template #title><i class="el-icon-user-solid"></i>{{showlogin}}</template>
-      <el-menu-item index="/userInfo">个人中心</el-menu-item>
+      <el-menu-item index="/personCenter">个人中心</el-menu-item>
       <el-menu-item @click="exit()">退出</el-menu-item>
     </el-submenu>
   </el-menu>
@@ -49,12 +49,12 @@ export default {
 
     exit () {
       //1.清除标记的    
-      sessionStorage.removeItem("username");
-      sessionStorage.removeItem("Authorization");
+      localStorage.removeItem("username");
+      localStorage.removeItem("Authorization");
       //2.怎么同步呢？         
       this.showlogin = null;
-      //router.push({ path: '/', querry: { redirect: router.currentRoute.fullPath } })
-      this.$router.replace('/');
+      this.$router.push({ path: '/', querry: { redirect: this.$router.currentRoute.fullPath } })
+      //this.$router.replace('/');
     }
 
 
