@@ -1,0 +1,67 @@
+{
+  "statusList": [
+    {
+      "status": "NotStart"
+    },
+    {
+      "status": "InProgress"
+    },
+    {
+      "status": "Resolve"
+    },
+    {
+      "status": "Closed"
+    },
+    {
+      "status": "ReOpen"
+    }
+  ],
+  "systemNameList": [
+    {
+      "systemName": "Saas"
+    },
+    {
+      "systemName": "Seamless"
+    },
+    {
+      "systemName": "PaWeb"
+    },
+    {
+      "systemName": "CIRC PAI"
+    },
+    {
+      "systemName": "B2B"
+    },
+    {
+      "systemName": "eCashman"
+    }
+  ],
+  "taskTypeList": [
+    {
+      "taskType": "Request",
+      "taskValue": "Request"
+    },
+    {
+      "taskType": "Change Request",
+      "taskValue": "CR"
+    },
+    {
+      "taskType": "Defect",
+      "taskValue": "Defect"
+    }
+  ],
+  "severityList": [
+    {
+      "label": "Hight",
+      "value": "Hight"
+    },
+    {
+      "label": "Medium",
+      "value": "Medium"
+    },
+    {
+      "label": "Low",
+      "value": "Low"
+    }
+  ]
+}

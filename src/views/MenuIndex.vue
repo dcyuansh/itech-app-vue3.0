@@ -23,6 +23,12 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
+  name: 'MenuIndex',
+  data () {
+    return {
+    }
+  },
+
   components: {
     'v-header': Header,
     'v-footer': Footer,

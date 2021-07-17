@@ -22,7 +22,7 @@
                          style="width:100%"
                          placeholder="请输入任务人"
                          filterable>
-                <el-option v-for="item in alluser"
+                <el-option v-for="item in userList"
                            :key="item.code"
                            :label="item.name"
                            :value="item.code">
@@ -46,19 +46,22 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="创建日期:">
-              <el-date-picker v-model="form.insertDate"
+              <el-date-picker v-model="form.insertTime"
                               type="date"
                               placeholder="选择日期">
               </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-button type="primary"
-                   round
-                   @click="handleQuery()">查询结果</el-button>
-        <el-button type="primary"
-                   round
-                   @click="handleReset()">重置查询</el-button>
+
+        <div style=" text-align: center;">
+          <el-button type="primary"
+                     round
+                     @click="handleQuery()">查询结果</el-button>
+          <el-button type="primary"
+                     round
+                     @click="handleReset()">重置查询</el-button>
+        </div>
       </el-form>
     </div>
     <!--查询框begin-->
@@ -71,9 +74,9 @@
                 style="width: 100%"
                 v-on:row-dblclick="rowdblclick">
         <el-table-column fixed
-                         prop="insertDate"
+                         prop="insertTime"
                          label="时间"
-                         width="95">
+                         width="100">
         </el-table-column>
         <el-table-column fixed
                          prop="taskNo"
@@ -120,18 +123,12 @@
                          label="内容">
         </el-table-column>
         <el-table-column label="操作"
-                         width="120">
-          <template slot-scope="scope">
+                         width="100">
+          <template v-slot="scope">
             <el-button size="mini"
                        type='primary'
                        @click="handleEditDialog(scope.$index, scope.row)">修改
             </el-button>
-            <!--
-            <el-button size="mini"
-                       type="danger"
-                       @click="handleDelete(scope.$index, scope.row)">删除
-            </el-button>
-            -->
           </template>
         </el-table-column>
       </el-table>
@@ -220,7 +217,7 @@
                      style="width:100%"
                      placeholder="请输入任务人"
                      filterable>
-            <el-option v-for="item in alluser"
+            <el-option v-for="item in userList"
                        :key="item.code"
                        :label="item.name"
                        :value="item.code">
@@ -273,7 +270,8 @@
 </template>
 
 <script>
-
+import selectdata from '../data/selectdata.json';
+import { queryCommTask, updateCommTask, queryUserList } from '../utils/api.js';
 
 
 export default {
@@ -285,7 +283,7 @@ export default {
         taskNo: '',
         assignee: '',
         status: '',
-        insertDate: ''
+        insertTime: ''
       },
 
       /*分页数据*/
@@ -295,16 +293,14 @@ export default {
       tableData: [],
 
       //任务状态选项
-      statusOptions: [],
+      statusOptions: selectdata.statusList,
+      //systemName选项信息
+      systemNameOptions: selectdata.systemNameList,
+      //taskType选项信息 
+      taskTypeOptions: selectdata.taskTypeList,
 
       //用户人员选项信息
-      alluser: [],
-
-      //systemName选项信息
-      systemNameOptions: [],
-
-      //taskType选项信息 
-      taskTypeOptions: [],
+      userList: [],
 
 
       /***编辑框 begin */
@@ -330,7 +326,7 @@ export default {
   // 页面初始化数据
   mounted: function () {
     this.handleQuery();
-    this.userList();
+    this.getUserList();
   },
   methods: {
     // 设置每页显示条数
@@ -346,6 +342,13 @@ export default {
 
     // 查询
     handleQuery () {
+      queryCommTask(this.form)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            this.tableData = res.data;
+          }
+          this.messages = res.messages;
+        })
 
     },
 
@@ -354,7 +357,7 @@ export default {
       this.form.taskNo = '';
       this.form.assignee = '';
       this.form.status = '';
-      this.form.insertDate = ''
+      this.form.insertTime = ''
     },
 
     // 编辑弹框
@@ -365,13 +368,16 @@ export default {
 
     //编辑保存
     handleEditSave () {
-
+      updateCommTask(this.editForm)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            //this.handleQuery();
+          }
+          this.dialogFormVisible = false;
+          this.messages = res.messages;
+        })
     },
 
-    // 删除
-    handleDelete (indx, row) {
-
-    },
 
 
     //跳转到task详细信息页面
@@ -383,8 +389,16 @@ export default {
 
 
     //加载all user list
-    async userList () {
-
+    async getUserList () {
+      queryUserList(this.form)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            res.data.forEach(element => {
+              this.userList.push({ name: element.userName, code: element.userName });
+            })
+          }
+          this.messages = res.messages;
+        })
     },
 
   },

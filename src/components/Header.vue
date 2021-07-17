@@ -35,8 +35,8 @@
 
 
 <script>
-
 export default {
+  name: 'Header',
   data () {
     return {
       showlogin: localStorage.getItem("username"),
