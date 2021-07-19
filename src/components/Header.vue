@@ -12,13 +12,13 @@
     <el-menu-item index="/home"><i class="el-icon-menu"></i>首页</el-menu-item>
 
     <el-submenu index="task">
-      <template #title><i class="el-icon-s-tools"></i>我的工作台</template>
+      <template #title><i class="el-icon-s-home"></i>我的工作台</template>
       <el-menu-item index="/myTask">我的任务</el-menu-item>
       <el-menu-item index="/createTask">新建任务</el-menu-item>
     </el-submenu>
 
     <el-submenu index="manage">
-      <template #title><i class="el-icon-s-tools"></i>管理中心</template>
+      <template #title><i class="el-icon-s-management"></i>管理中心</template>
       <el-menu-item index="/userManage">用户管理</el-menu-item>
       <el-menu-item index="/roleManage">角色管理</el-menu-item>
     </el-submenu>
