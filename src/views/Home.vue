@@ -2,7 +2,7 @@
   <div>
     <!--查询框begin-->
     <div class="div-style"
-         style="height: 200px;">
+         style="height: 80%;">
       <el-form :model="form"
                ref="form"
                label-width="100px">
