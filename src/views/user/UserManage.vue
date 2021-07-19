@@ -41,7 +41,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <div style=" text-align: center;">
+        <div style=" text-align: center;margin-bottom: 20px;">
           <el-button type="primary"
                      round
                      @click="handleQuery()">查询结果</el-button>
