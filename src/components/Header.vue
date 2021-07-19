@@ -11,15 +11,27 @@
 
     <el-menu-item index="/home"><i class="el-icon-menu"></i>首页</el-menu-item>
 
+    <el-submenu index="task">
+      <template #title><i class="el-icon-s-tools"></i>我的工作台</template>
+      <el-menu-item index="/myTask">我的任务</el-menu-item>
+      <el-menu-item index="/createTask">新建任务</el-menu-item>
+    </el-submenu>
+
     <el-submenu index="manage">
       <template #title><i class="el-icon-s-tools"></i>管理中心</template>
       <el-menu-item index="/userManage">用户管理</el-menu-item>
       <el-menu-item index="/roleManage">角色管理</el-menu-item>
-      <el-submenu index="tool">
-        <template #title>工具</template>
-        <el-menu-item index="/verifyIdCard">身份证校验</el-menu-item>
-        <el-menu-item index="/realName">实名认证</el-menu-item>
-        <el-menu-item index="/editPicture">图片编辑</el-menu-item>
+    </el-submenu>
+
+    <el-submenu index="tool">
+      <template #title><i class="el-icon-s-tools"></i>工具</template>
+      <el-menu-item index="#">身份证校验</el-menu-item>
+      <el-menu-item index="#">实名认证</el-menu-item>
+      <el-menu-item index="#">图片编辑</el-menu-item>
+      <el-submenu index="excel">
+        <template #title>excel处理</template>
+        <el-menu-item index="#">导入</el-menu-item>
+        <el-menu-item index="#">导出</el-menu-item>
       </el-submenu>
     </el-submenu>
 

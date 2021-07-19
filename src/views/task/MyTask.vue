@@ -6,7 +6,7 @@
       <el-form :model="form"
                ref="form"
                label-width="100px">
-        <div style="text-align: left"><label>任务中心:</label></div>
+        <div style="text-align: left"><label>我的任务:</label></div>
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label="任务编号:">
@@ -17,15 +17,14 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="任务所有人:">
-              <el-select v-model="form.assignee"
+            <el-form-item label="任务类型:">
+              <el-select v-model="form.taskType"
                          style="width:100%"
-                         placeholder="请输入任务人"
-                         filterable>
-                <el-option v-for="item in userList"
-                           :key="item.code"
-                           :label="item.name"
-                           :value="item.code">
+                         placeholder="请输入任务类型">
+                <el-option v-for="item in taskTypeOptions"
+                           :key="item.taskType"
+                           :label="item.taskType"
+                           :value="item.taskValue">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -53,7 +52,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-
         <div style=" text-align: center;">
           <el-button type="primary"
                      round
@@ -129,6 +127,12 @@
                        type='primary'
                        @click="handleEditDialog(scope.$index, scope.row)">修改
             </el-button>
+            <!--
+            <el-button size="mini"
+                       type="danger"
+                       @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
+            -->
           </template>
         </el-table-column>
       </el-table>
@@ -213,7 +217,7 @@
                      style="width:100%"
                      placeholder="请输入任务人"
                      filterable>
-            <el-option v-for="item in userList"
+            <el-option v-for="item in alluser"
                        :key="item.code"
                        :label="item.name"
                        :value="item.code">
@@ -260,7 +264,6 @@
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary"
                    @click="handleEditSave()">确 定</el-button>
-
       </div>
     </el-dialog>
     <!-- 弹出编辑框 end -->
@@ -268,8 +271,11 @@
 </template>
 
 <script>
-import selectdata from '../data/selectdata.json';
-import { queryCommTask, updateCommTask, queryUserList } from '../utils/api.js';
+import selectdata from '../../data/selectdata.json';
+import { queryUserCommTask, updateCommTask, queryUserList } from '../../utils/api.js';
+
+
+
 
 
 export default {
@@ -279,6 +285,7 @@ export default {
       messages: [],
       form: {
         taskNo: '',
+        taskType: '',
         assignee: '',
         status: '',
         insertTime: ''
@@ -290,6 +297,7 @@ export default {
       pageSize: 10, // 每页的数据条数
       tableData: [],
 
+
       //任务状态选项
       statusOptions: selectdata.statusList,
       //systemName选项信息
@@ -298,7 +306,7 @@ export default {
       taskTypeOptions: selectdata.taskTypeList,
 
       //用户人员选项信息
-      userList: [],
+      alluser: [],
 
 
       /***编辑框 begin */
@@ -324,8 +332,9 @@ export default {
   // 页面初始化数据
   mounted: function () {
     this.handleQuery();
-    this.getUserList();
+    this.userList();
   },
+
   methods: {
     // 设置每页显示条数
     handleSizeChange (val) {
@@ -340,20 +349,19 @@ export default {
 
     // 查询
     handleQuery () {
-      queryCommTask(this.form)
+      queryUserCommTask(this.form)
         .then(res => {
           if (res.status == 'SUCCESS') {
             this.tableData = res.data;
           }
           this.messages = res.messages;
         })
-
     },
 
     // 重置查询
     handleReset () {
       this.form.taskNo = '';
-      this.form.assignee = '';
+      this.form.taskType = '';
       this.form.status = '';
       this.form.insertTime = ''
     },
@@ -376,7 +384,27 @@ export default {
         })
     },
 
-
+    // 删除
+    // handleDelete (indx, row) {
+    //   this.$confirm('确定要删除这条信息吗？', '警告提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     closeOnClickModal: false,
+    //     type: 'warning',
+    //     center: true
+    //   }).then(async () => {
+    //     const delFormData = {
+    //       'taskNo': row.taskNo,
+    //     };
+    //     this.$delete('/api/task/delete', delFormData)
+    //       .then(res => {
+    //         if (res.status == 'SUCCESS') {
+    //           this.handleQuery();
+    //         }
+    //         this.messages = res.messages;
+    //       })
+    //   })
+    // },
 
     //跳转到task详细信息页面
     rowdblclick (row) {
@@ -385,19 +413,19 @@ export default {
     },
 
 
-
     //加载all user list
-    async getUserList () {
+    async userList () {
       queryUserList(this.form)
         .then(res => {
           if (res.status == 'SUCCESS') {
             res.data.forEach(element => {
-              this.userList.push({ name: element.userName, code: element.userName });
+              this.alluser.push({ name: element.userName, code: element.userName });
             })
           }
           this.messages = res.messages;
         })
     },
+
 
   },
 

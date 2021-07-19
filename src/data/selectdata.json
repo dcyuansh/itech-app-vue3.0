@@ -18,22 +18,10 @@
   ],
   "systemNameList": [
     {
-      "systemName": "Saas"
+      "systemName": "East Plus"
     },
     {
-      "systemName": "Seamless"
-    },
-    {
-      "systemName": "PaWeb"
-    },
-    {
-      "systemName": "CIRC PAI"
-    },
-    {
-      "systemName": "B2B"
-    },
-    {
-      "systemName": "eCashman"
+      "systemName": "Others"
     }
   ],
   "taskTypeList": [
@@ -62,6 +50,60 @@
     {
       "label": "Low",
       "value": "Low"
+    }
+  ],
+  "idTypeList": [
+    {
+      "code": "身份证",
+      "name": "身份证"
+    },
+    {
+      "code": "护照",
+      "name": "护照"
+    },
+    {
+      "code": "军官证",
+      "name": "军官证"
+    },
+    {
+      "code": "其他",
+      "name": "其他"
+    }
+  ],
+  "roleList": [
+    {
+      "code": "PM",
+      "name": "项目经理"
+    },
+    {
+      "code": "AT",
+      "name": "架构师"
+    },
+    {
+      "code": "BA",
+      "name": "业务分析师"
+    },
+    {
+      "code": "AD",
+      "name": "开发工程师"
+    },
+    {
+      "code": "ST",
+      "name": "测试工程师"
+    }
+  ],
+  "stateList": [
+    {
+      "code": "ACITVE",
+      "name": "有效"
+    },
+    {
+      "code": "DEACITVE",
+      "name": "无效"
+    },
+    {
+      "code": "FROZEN",
+      "name": "冻结"
     }
   ]
 }

@@ -20,7 +20,7 @@
             <el-form-item label="证件号:">
               <el-input type="text"
                         prefix-icon="el-icon-edit-outline"
-                        v-model="form.idCard"
+                        v-model="form.idNo"
                         placeholder="请输入证件号"></el-input>
             </el-form-item>
           </el-col>
@@ -41,12 +41,14 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-button type="primary"
-                   round
-                   @click="handleQuery()">查询结果</el-button>
-        <el-button type="primary"
-                   round
-                   @click="handleReset()">重置查询</el-button>
+        <div style=" text-align: center;">
+          <el-button type="primary"
+                     round
+                     @click="handleQuery()">查询结果</el-button>
+          <el-button type="primary"
+                     round
+                     @click="handleReset()">重置查询</el-button>
+        </div>
       </el-form>
     </div>
     <!--查询框begin-->
@@ -68,14 +70,14 @@
                          width="100">
         </el-table-column>
         <el-table-column fixed
-                         prop="idCard"
+                         prop="idNo"
                          label="证件号"
                          width="180">
         </el-table-column>
         <el-table-column fixed
                          prop="gender"
                          label="性别"
-                         width="60">
+                         width="70">
         </el-table-column>
         <el-table-column fixed
                          prop="phone"
@@ -88,14 +90,14 @@
                          width="200">
         </el-table-column>
         <el-table-column fixed
-                         prop="lockInd"
-                         label="锁定状态"
+                         prop="roleCd"
+                         label="角色"
                          width="80">
         </el-table-column>
         <el-table-column fixed
-                         prop="lockDate"
-                         label="锁定时间"
-                         width="180">
+                         prop="state"
+                         label="状态"
+                         width="80">
         </el-table-column>
         <el-table-column fixed
                          prop="address"
@@ -103,15 +105,11 @@
         </el-table-column>
 
         <el-table-column label="操作"
-                         width="160">
-          <template slot-scope="scope">
+                         width="100">
+          <template v-slot="scope">
             <el-button size="mini"
                        type='primary'
                        @click="handleEditDialog(scope.$index, scope.row)">修改
-            </el-button>
-            <el-button size="mini"
-                       type="danger"
-                       @click="handleDelete(scope.$index, scope.row)">删除
             </el-button>
           </template>
         </el-table-column>
@@ -132,7 +130,7 @@
 
     <!-- 弹出编辑框 begin -->
     <el-dialog title="修改用户信息"
-               :visible.sync="dialogFormVisible">
+               v-model="dialogFormVisible">
       <el-form :model="editForm">
         <el-form-item label="用户名:"
                       :label-width="formLabelWidth">
@@ -142,13 +140,6 @@
                     placeholder="请输入用户名"
                     auto-complete="off"
                     :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item label="密码:"
-                      :label-width="formLabelWidth">
-          <el-input type="password"
-                    prefix-icon="el-icon-key"
-                    v-model="editForm.password"
-                    placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item label="性别:"
                       :label-width="formLabelWidth">
@@ -166,16 +157,17 @@
           <el-select v-model="editForm.idType"
                      style="width:100%"
                      placeholder="请选择证件类型">
-            <el-option label="身份证"
-                       value="身份证"></el-option>
-            <el-option label="其他"
-                       value="其他"></el-option>
+            <el-option v-for="item in idTypeList"
+                       :key="item.code"
+                       :label="item.name"
+                       :value="item.code">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="证件号:"
                       :label-width="formLabelWidth">
           <el-input type="text"
-                    v-model="editForm.idCard"
+                    v-model="editForm.idNo"
                     placeholder="请输入证件号"
                     auto-complete="off"></el-input>
         </el-form-item>
@@ -193,15 +185,28 @@
                     placeholder="请输入电话号码"
                     auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="锁定状态:"
+        <el-form-item label="角色:"
                       :label-width="formLabelWidth">
-          <el-select v-model="editForm.lockInd"
+          <el-select v-model="editForm.roleCd"
+                     style="width:100%"
+                     placeholder="请选择角色">
+            <el-option v-for="item in roleList"
+                       :key="item.code"
+                       :label="item.name"
+                       :value="item.code">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="状态:"
+                      :label-width="formLabelWidth">
+          <el-select v-model="editForm.state"
                      style="width:100%"
                      placeholder="请选择状态">
-            <el-option label="Y"
-                       value="Y"></el-option>
-            <el-option label="N"
-                       value="N"></el-option>
+            <el-option v-for="item in stateList"
+                       :key="item.code"
+                       :label="item.name"
+                       :value="item.code">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="地址:"
@@ -228,6 +233,10 @@
 
 
 <script>
+import { queryUserList, updateUser } from '../../utils/api'
+import selectdata from '../../data/selectdata.json';
+
+
 export default {
   name: 'UserManage',
   data () {
@@ -237,7 +246,7 @@ export default {
       /***查询条件信息begin */
       form: {
         userName: '',
-        idCard: '',
+        idNo: '',
         email: '',
         phone: ''
       },
@@ -253,14 +262,25 @@ export default {
       editForm: {
         userName: '',
         idType: '',
-        idCard: '',
-        email: '',
-        phone: '',
+        idNo: '',
         gender: '',
+        phone: '',
+        email: '',
+        state: '',
+        roleCd: '',
         address: ''
       },
       formLabelWidth: '80px',
       /***编辑框 end */
+
+
+      //用户证件类型选项
+      idTypeList: selectdata.idTypeList,
+      //用户角色选项
+      roleList: selectdata.roleList,
+      //用户账号状态选项
+      stateList: selectdata.stateList,
+
 
     }
   },
@@ -283,13 +303,19 @@ export default {
 
     // 查询
     handleQuery () {
-
+      queryUserList(this.form)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            this.tableData = res.data;
+          }
+          this.messages = res.messages;
+        })
     },
 
     // 重置查询
     handleReset () {
       this.form.userName = '';
-      this.form.idCard = '';
+      this.form.idNo = '';
       this.form.email = '';
       this.form.phone = ''
     },
@@ -305,25 +331,15 @@ export default {
 
     //编辑保存
     handleEditSave () {
-
+      updateUser(this.editForm)
+        .then(res => {
+          if (res.status == 'SUCCESS') {
+            //this.handleQuery();
+            this.dialogFormVisible = false;
+          }
+          this.messages = res.messages;
+        })
     },
-
-    // 删除
-    handleDelete (indx, row) {
-      this.$confirm('确定要删除这条信息吗？', '警告提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        closeOnClickModal: false,
-        type: 'warning',
-        center: true
-      }).then(async () => {
-        const delFormData = {
-          'userName': row.userName,
-        };
-
-      })
-    },
-
 
   },
 }

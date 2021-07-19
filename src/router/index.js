@@ -20,6 +20,16 @@ const UserManage = () => import(/* webpackChunkName: "manage" */ '../views/user/
 //角色管理
 const RoleManage = () => import(/* webpackChunkName: "manage" */ '../views/user/RoleManage.vue')
 
+//我的任务中心
+const MyTask = () => import(/* webpackChunkName: "task" */ '../views/task/MyTask.vue')
+//新建任务
+const CreateTask = () => import(/* webpackChunkName: "task" */ '../views/task/CreateTask.vue')
+//任务历史信息
+const TaskHisDetail = () => import(/* webpackChunkName: "task" */ '../views/task/TaskHisDetail.vue')
+
+
+
+
 
 
 const routes = [
@@ -51,6 +61,38 @@ const routes = [
         path: '/home',
         component: Home,
         meta: { title: '首页' }
+      },
+    ]
+  },
+
+  //任务中心
+  {
+    path: '/task',
+    name: 'task',
+    component: MenuIndex,
+    redirect: '/myTask',
+    meta: { title: '管理中心', },
+    children: [
+      //我的任务
+      {
+        path: '/myTask',
+        name: 'myTask',
+        component: MyTask,
+        meta: { title: '我的任务' }
+      },
+      //新建任务
+      {
+        path: '/createTask',
+        name: 'createTask',
+        component: CreateTask,
+        meta: { title: '新建任务' }
+      },
+      //任务历史记录
+      {
+        path: '/taskHisDetail',
+        name: 'taskHisDetail',
+        component: TaskHisDetail,
+        meta: { title: '任务历史记录' }
       },
     ]
   },
