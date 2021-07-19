@@ -20,7 +20,7 @@
             <el-form-item label="任务类型:">
               <el-select v-model="form.taskType"
                          style="width:100%"
-                         placeholder="请输入任务类型">
+                         placeholder="请选择任务类型">
                 <el-option v-for="item in taskTypeOptions"
                            :key="item.taskType"
                            :label="item.taskType"
@@ -34,7 +34,7 @@
             <el-form-item label="状态:">
               <el-select v-model="form.status"
                          filterable
-                         placeholder="请选择">
+                         placeholder="请选择状态">
                 <el-option v-for="item in statusOptions"
                            :key="item.status"
                            :label="item.status"
@@ -44,11 +44,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="创建日期:">
-              <el-date-picker v-model="form.insertTime"
-                              type="date"
-                              placeholder="选择日期">
-              </el-date-picker>
+            <el-form-item label="系统名称:">
+              <el-select v-model="form.systemName"
+                         style="width:95%"
+                         placeholder="请选择系统名称">
+                <el-option v-for="item in systemNameOptions"
+                           :key="item.systemName"
+                           :label="item.systemName"
+                           :value="item.systemName">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -288,7 +293,7 @@ export default {
         taskType: '',
         assignee: '',
         status: '',
-        insertTime: ''
+        systemName: ''
       },
 
       /*分页数据*/
@@ -363,7 +368,7 @@ export default {
       this.form.taskNo = '';
       this.form.taskType = '';
       this.form.status = '';
-      this.form.insertTime = ''
+      this.form.systemName = ''
     },
 
     // 编辑弹框

@@ -62,7 +62,7 @@
         <el-table-column fixed
                          prop="userName"
                          label="用户名"
-                         width="120">
+                         width="150">
         </el-table-column>
         <el-table-column fixed
                          prop="idType"
