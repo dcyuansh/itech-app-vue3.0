@@ -13,7 +13,7 @@ module.exports = {
   // 与“根”相关的目录，构建输出将放在其中。如果目录存在，它将在构建之前被删除。 @default 'dist'
   outDir: "dist",
   //端口号
-  port: 3000,
+  port: 8080,
   // 是否自动在浏览器打开
   open: false,
   // 是否开启 https
@@ -28,7 +28,7 @@ module.exports = {
   server: {
     proxy: {
       "/api": {
-        target: 'http://localhost:8443',//代理地址，这里设置的地址会代替axios中设置的baseURL
+        target: 'http://106.14.202.126:8443',//代理地址，这里设置的地址会代替axios中设置的baseURL
         changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
         pathRewrite: {
           '^/api': '/api'
