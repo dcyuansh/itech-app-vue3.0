@@ -152,7 +152,7 @@ const routes = [
 
 
 const router = createRouter({
-  history: createWebHistory('/itech/'),
+  history: createWebHistory(import.meta.env.VITE_APP_NAME),
   routes
 })
 

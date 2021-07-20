@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // 定义接口基础url
 //const base_url = 'https://localhost:8443';
-const base_url = 'http://localhost:8443';
+const base_url = import.meta.env.VITE_APP_BASE_API;
+
 
 // axios 配置超时时间
 axios.defaults.timeout = 50000;
