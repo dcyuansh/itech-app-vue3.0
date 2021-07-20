@@ -347,7 +347,7 @@ export default {
 <style>
 .el-row {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0%;
 }
 
 .el-col {
