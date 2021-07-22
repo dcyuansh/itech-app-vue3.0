@@ -181,7 +181,8 @@
           </el-select>
         </el-form-item>
         <el-form-item label="任务主题:"
-                      :label-width="formLabelWidth">
+                      :label-width="formLabelWidth"
+                      :required="true">
           <el-input type="text"
                     v-model="editForm.taskSubject"
                     placeholder="请输入任务主题"
@@ -190,7 +191,7 @@
         <el-form-item label="任务内容:"
                       :label-width="formLabelWidth">
           <el-input type="textarea"
-                    :rows="8"
+                    :rows="4"
                     v-model="editForm.taskContent"
                     placeholder="请输入任务内容"
                     auto-complete="off"></el-input>
@@ -261,6 +262,14 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="描述:"
+                      :label-width="formLabelWidth">
+          <el-input type="textarea"
+                    :rows="4"
+                    v-model="editForm.remarks"
+                    placeholder="请输入描述"
+                    auto-complete="off"></el-input>
+        </el-form-item>
 
       </el-form>
       <div slot="footer"
@@ -326,7 +335,8 @@ export default {
         createdBy: '',
         assignee: '',
         estimatedEffort: 0,
-        actualEffort: 0
+        actualEffort: 0,
+        remarks: ''
       },
       formLabelWidth: '100px',
       /***编辑框 end */

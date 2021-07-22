@@ -4,7 +4,7 @@ console.log(path.resolve(__dirname, "./src"));
 
 module.exports = {
   alias: {
-    "@": path.resolve(__dirname, "./src"),
+    "/@/": path.resolve(__dirname, "./src"),
   },
 
   //在生产中服务时的基本公共路径。 @default '/'

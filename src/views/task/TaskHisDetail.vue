@@ -20,6 +20,7 @@
                 <p class="p-line-height">总工时：{{item.estimatedEffort}}</p>
                 <p class="p-line-height">实际工时：{{item.actualEffort}}</p>
                 <p class="p-line-height">任务状态：{{item.status}}</p>
+                <p class="p-line-height">描述：{{item.remarks}}</p>
               </el-card>
             </el-timeline-item>
 

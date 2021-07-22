@@ -11,7 +11,8 @@
           <el-col :span="12">
             <el-form-item label="任务标题:"
                           :label-width="formLabelWidth"
-                          class="el-form-item-width">
+                          class="el-form-item-width"
+                          :required="true">
               <el-input type="text"
                         v-model="form.taskSubject"
                         placeholder="请输入任务标题"
@@ -21,7 +22,8 @@
           <el-col :span="6">
             <el-form-item label="系统名称:"
                           :label-width="formLabelWidth"
-                          class="el-form-item-medium-width">
+                          class="el-form-item-medium-width"
+                          :required="true">
               <el-select v-model="form.systemName"
                          style="width:100%"
                          placeholder="请选择系统名称">
@@ -103,7 +105,7 @@
                           :label-width="formLabelWidth"
                           class="el-form-item-width">
               <el-input type="textarea"
-                        :rows="6"
+                        :rows="4"
                         v-model="form.taskContent"
                         placeholder="请输入任务内容"
                         auto-complete="off"
