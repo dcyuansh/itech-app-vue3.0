@@ -172,7 +172,8 @@
                       :label-width="formLabelWidth">
           <el-select v-model="editForm.taskType"
                      style="width:100%"
-                     placeholder="请选择任务类型">
+                     placeholder="请选择任务类型"
+                     :disabled="true">
             <el-option v-for="item in taskTypeOptions"
                        :key="item.taskType"
                        :label="item.taskType"
@@ -186,7 +187,8 @@
           <el-input type="text"
                     v-model="editForm.taskSubject"
                     placeholder="请输入任务主题"
-                    auto-complete="off"></el-input>
+                    auto-complete="off"
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="任务内容:"
                       :label-width="formLabelWidth">
@@ -200,7 +202,8 @@
                       :label-width="formLabelWidth">
           <el-select v-model="editForm.systemName"
                      style="width:100%"
-                     placeholder="请选择系统名称">
+                     placeholder="请选择系统名称"
+                     :disabled="true">
             <el-option v-for="item in systemNameOptions"
                        :key="item.systemName"
                        :label="item.systemName"
@@ -237,7 +240,8 @@
                     placeholder="请输入预估工时"
                     auto-complete="off"
                     onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
-                    maxlength="4"></el-input>
+                    maxlength="4"
+                    :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="实际工时(h):"
                       :label-width="formLabelWidth">
@@ -287,9 +291,6 @@
 <script>
 import selectdata from '../../data/selectdata.json';
 import { queryUserCommTask, updateCommTask, queryUserList } from '../../utils/api.js';
-
-
-
 
 
 export default {
@@ -392,6 +393,7 @@ export default {
       updateCommTask(this.editForm)
         .then(res => {
           if (res.status == 'SUCCESS') {
+            this.$message.success('任务编辑成功!');
             //this.handleQuery();
             this.dialogFormVisible = false;
           }

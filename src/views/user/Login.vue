@@ -61,6 +61,7 @@ export default {
       login(this.loginForm)
         .then(res => {
           if (res.status == 'SUCCESS') {
+            //this.$message.success('恭喜你登陆成功!');
             //localStorage
             localStorage.setItem('username', res.data.userName)
             localStorage.setItem('Authorization', res.data.token)

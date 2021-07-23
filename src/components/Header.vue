@@ -25,9 +25,9 @@
 
     <el-submenu index="tool">
       <template #title><i class="el-icon-s-tools"></i>工具</template>
+      <el-menu-item index="/genIdPhoto">证件照生成</el-menu-item>
       <el-menu-item index="#">身份证校验</el-menu-item>
       <el-menu-item index="#">实名认证</el-menu-item>
-      <el-menu-item index="#">图片编辑</el-menu-item>
       <el-submenu index="excel">
         <template #title>excel处理</template>
         <el-menu-item index="#">导入</el-menu-item>

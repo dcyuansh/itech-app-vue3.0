@@ -334,6 +334,7 @@ export default {
       updateUser(this.editForm)
         .then(res => {
           if (res.status == 'SUCCESS') {
+            this.$message.success('你已成功更新用户信息!');
             //this.handleQuery();
             this.dialogFormVisible = false;
           }

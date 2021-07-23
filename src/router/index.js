@@ -27,8 +27,8 @@ const CreateTask = () => import(/* webpackChunkName: "task" */ '../views/task/Cr
 //任务历史信息
 const TaskHisDetail = () => import(/* webpackChunkName: "task" */ '../views/task/TaskHisDetail.vue')
 
-
-
+//生成证件照
+const GenIdPhoto = () => import(/* webpackChunkName: "tool" */ '../views/photo/GenIdPhoto.vue')
 
 
 
@@ -65,13 +65,13 @@ const routes = [
     ]
   },
 
-  //任务中心
+  //我的工作台
   {
     path: '/task',
     name: 'task',
     component: MenuIndex,
     redirect: '/myTask',
-    meta: { title: '管理中心', },
+    meta: { title: '我的工作台', },
     children: [
       //我的任务
       {
@@ -143,6 +143,22 @@ const routes = [
     component: Page404,
     meta: { title: '404，没有对应该路由页面' },
   },
+
+  //工具
+  {
+    path: '/genIdPhoto',
+    name: 'genIdPhoto',
+    component: MenuIndex,
+    redirect: '/genIdPhoto',
+    children: [
+      {
+        path: '/genIdPhoto',
+        component: GenIdPhoto,
+        meta: { title: '生成证件照' }
+      },
+    ]
+  },
+
 
 
 ]

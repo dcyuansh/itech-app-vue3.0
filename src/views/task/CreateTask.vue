@@ -185,6 +185,7 @@ export default {
       addCommTask(this.form)
         .then(res => {
           if (res.status == 'SUCCESS') {
+            this.$message.success('新建任务成功!');
             this.handleReset();
           }
           this.messages = res.messages;
