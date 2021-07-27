@@ -27,10 +27,10 @@
               <el-select v-model="form.systemName"
                          style="width:100%"
                          placeholder="请选择系统名称">
-                <el-option v-for="item in systemNameOptions"
-                           :key="item.systemName"
-                           :label="item.systemName"
-                           :value="item.systemName">
+                <el-option v-for="item in systemNameList"
+                           :key="item.value"
+                           :label="item.name"
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -45,10 +45,10 @@
               <el-select v-model="form.taskType"
                          style="width:100%"
                          placeholder="请选择任务类型">
-                <el-option v-for="item in taskTypeOptions"
-                           :key="item.taskType"
-                           :label="item.taskType"
-                           :value="item.taskValue">
+                <el-option v-for="item in taskTypeList"
+                           :key="item.value"
+                           :label="item.name"
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -60,9 +60,9 @@
               <el-select v-model="form.severity"
                          style="width:100%"
                          placeholder="请选择优先级">
-                <el-option v-for="item in severityOptions"
+                <el-option v-for="item in ticketSeverityList"
                            :key="item.value"
-                           :label="item.label"
+                           :label="item.name"
                            :value="item.value">
                 </el-option>
               </el-select>
@@ -77,9 +77,9 @@
                          placeholder="请输入任务人"
                          filterable>
                 <el-option v-for="item in alluser"
-                           :key="item.code"
+                           :key="item.value"
                            :label="item.name"
-                           :value="item.code">
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -145,7 +145,9 @@
 </template>
 
 <script>
-import selectdata from '../../data/selectdata.json';
+import ticketSeverityList from '../../data/ticketseverity.json';
+import systemNameList from '../../data/systemname.json'
+import taskTypeList from '../../data/tasktype.json'
 import { addCommTask, queryUserList } from '../../utils/api.js';
 
 export default {
@@ -162,11 +164,11 @@ export default {
       formLabelWidth: '100px',
 
       //systemName选项信息
-      systemNameOptions: selectdata.systemNameList,
+      systemNameList: systemNameList,
       //taskType选项信息 
-      taskTypeOptions: selectdata.taskTypeList,
+      taskTypeList: taskTypeList,
       //severity选项信息 
-      severityOptions: selectdata.severityList,
+      ticketSeverityList: ticketSeverityList,
 
       //用户人员选项信息
       alluser: [],
@@ -210,7 +212,7 @@ export default {
         .then(res => {
           if (res.status == 'SUCCESS') {
             res.data.forEach(element => {
-              this.alluser.push({ name: element.userName, code: element.userName });
+              this.alluser.push({ name: element.userName, value: element.userName });
             })
           }
           this.messages = res.messages;

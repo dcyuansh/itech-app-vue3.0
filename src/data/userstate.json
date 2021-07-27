@@ -1,0 +1,14 @@
+[
+  {
+    "value": "ACITVE",
+    "name": "有效"
+  },
+  {
+    "value": "DEACITVE",
+    "name": "无效"
+  },
+  {
+    "value": "FROZEN",
+    "name": "冻结"
+  }
+]

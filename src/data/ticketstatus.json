@@ -1,0 +1,26 @@
+[
+  {
+    "value": "NotStart",
+    "name": "NotStart"
+  },
+  {
+    "value": "InProgress",
+    "name": "InProgress"
+  },
+  {
+    "value": "Resolve",
+    "name": "Resolve"
+  },
+  {
+    "value": "Closed",
+    "name": "Closed"
+  },
+  {
+    "value": "ReOpen",
+    "name": "ReOpen"
+  },
+  {
+    "value": "Reject",
+    "name": "Reject"
+  }
+]

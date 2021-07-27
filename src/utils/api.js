@@ -14,7 +14,7 @@ export const addCommTask = (params) => post("/api/task/save", params);
 //查询task任务列表
 export const queryCommTask = (params) => post("/api/task/query/all", params);
 //查询用户task任务列表
-export const queryUserCommTask = (params) => post("/api/task/query/all", params);
+export const queryUserCommTask = (params) => post("/api/task/query/user-task", params);
 //更新task任务
 export const updateCommTask = (params) => patch("/api/task/update", params);
 //任务历史记录查询

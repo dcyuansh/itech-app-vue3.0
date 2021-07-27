@@ -35,9 +35,9 @@
                        style="width:100%"
                        placeholder="请选择证件照规格">
               <el-option v-for="item in photoSizeList"
-                         :key="item.code"
+                         :key="item.value"
                          :label="item.name"
-                         :value="item.code">
+                         :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -48,9 +48,9 @@
                        style="width:100%"
                        placeholder="请选择底色">
               <el-option v-for="item in photoBackGroundList"
-                         :key="item.code"
+                         :key="item.value"
                          :label="item.name"
-                         :value="item.code">
+                         :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -68,7 +68,8 @@
 
 
 <script>
-import selectdata from '../../data/selectdata.json';
+import photoSizeList from '../../data/photosize.json';
+import photoBackGroundList from '../../data/photobackground.json';
 
 
 
@@ -83,9 +84,9 @@ export default {
       },
 
       //照片大小
-      photoSizeList: selectdata.photoSizeList,
+      photoSizeList: photoSizeList,
       //照片底色
-      photoBackGroundList: selectdata.photoBackGroundList,
+      photoBackGroundList: photoBackGroundList,
 
     }
   }

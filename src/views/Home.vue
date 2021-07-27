@@ -23,9 +23,9 @@
                          placeholder="请选择任务人"
                          filterable>
                 <el-option v-for="item in userList"
-                           :key="item.code"
+                           :key="item.value"
                            :label="item.name"
-                           :value="item.code">
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -36,10 +36,10 @@
               <el-select v-model="form.status"
                          filterable
                          placeholder="请选择状态">
-                <el-option v-for="item in statusOptions"
-                           :key="item.status"
-                           :label="item.status"
-                           :value="item.status">
+                <el-option v-for="item in ticketStatusList"
+                           :key="item.value"
+                           :label="item.name"
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -49,10 +49,10 @@
               <el-select v-model="form.systemName"
                          style="width:95%"
                          placeholder="请选择系统名称">
-                <el-option v-for="item in systemNameOptions"
-                           :key="item.systemName"
-                           :label="item.systemName"
-                           :value="item.systemName">
+                <el-option v-for="item in systemNameList"
+                           :key="item.value"
+                           :label="item.name"
+                           :value="item.value">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -170,10 +170,10 @@
                      style="width:100%"
                      placeholder="请选择任务类型"
                      :disabled="true">
-            <el-option v-for="item in taskTypeOptions"
-                       :key="item.taskType"
-                       :label="item.taskType"
-                       :value="item.taskValue">
+            <el-option v-for="item in taskTypeList"
+                       :key="item.value"
+                       :label="item.name"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -200,10 +200,10 @@
                      style="width:100%"
                      placeholder="请选择系统名称"
                      :disabled="true">
-            <el-option v-for="item in systemNameOptions"
-                       :key="item.systemName"
-                       :label="item.systemName"
-                       :value="item.systemName">
+            <el-option v-for="item in systemNameList"
+                       :key="item.value"
+                       :label="item.name"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -223,9 +223,9 @@
                      placeholder="请输入任务人"
                      filterable>
             <el-option v-for="item in userList"
-                       :key="item.code"
+                       :key="item.value"
                        :label="item.name"
-                       :value="item.code">
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -255,10 +255,10 @@
                      filterable
                      style="width:100%"
                      placeholder="请选择状态">
-            <el-option v-for="item in statusOptions"
-                       :key="item.status"
-                       :label="item.status"
-                       :value="item.status">
+            <el-option v-for="item in ticketStatusList"
+                       :key="item.value"
+                       :label="item.name"
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -285,7 +285,9 @@
 </template>
 
 <script>
-import selectdata from '../data/selectdata.json';
+import ticketStatusList from '../data/ticketstatus.json';
+import systemNameList from '../data/systemname.json'
+import taskTypeList from '../data/tasktype.json'
 import { queryCommTask, updateCommTask, queryUserList } from '../utils/api.js';
 
 
@@ -308,11 +310,11 @@ export default {
       tableData: [],
 
       //任务状态选项
-      statusOptions: selectdata.statusList,
+      ticketStatusList: ticketStatusList,
       //systemName选项信息
-      systemNameOptions: selectdata.systemNameList,
+      systemNameList: systemNameList,
       //taskType选项信息 
-      taskTypeOptions: selectdata.taskTypeList,
+      taskTypeList: taskTypeList,
 
       //用户人员选项信息
       userList: [],
@@ -411,7 +413,7 @@ export default {
         .then(res => {
           if (res.status == 'SUCCESS') {
             res.data.forEach(element => {
-              this.userList.push({ name: element.userName, code: element.userName });
+              this.userList.push({ name: element.userName, value: element.userName });
             })
           }
           this.messages = res.messages;

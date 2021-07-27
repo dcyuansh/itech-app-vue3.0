@@ -158,9 +158,9 @@
                      style="width:100%"
                      placeholder="请选择证件类型">
             <el-option v-for="item in idTypeList"
-                       :key="item.code"
+                       :key="item.value"
                        :label="item.name"
-                       :value="item.code">
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -190,10 +190,10 @@
           <el-select v-model="editForm.roleCd"
                      style="width:100%"
                      placeholder="请选择角色">
-            <el-option v-for="item in roleList"
-                       :key="item.code"
+            <el-option v-for="item in userRoleList"
+                       :key="item.value"
                        :label="item.name"
-                       :value="item.code">
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -202,10 +202,10 @@
           <el-select v-model="editForm.state"
                      style="width:100%"
                      placeholder="请选择状态">
-            <el-option v-for="item in stateList"
-                       :key="item.code"
+            <el-option v-for="item in userStateList"
+                       :key="item.value"
                        :label="item.name"
-                       :value="item.code">
+                       :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -233,8 +233,11 @@
 
 
 <script>
+import idTypeList from '../../data/idtype.json';
+import userRoleList from '../../data/userrole.json'
+import userStateList from '../../data/userstate.json'
 import { queryUserList, updateUser } from '../../utils/api'
-import selectdata from '../../data/selectdata.json';
+
 
 
 export default {
@@ -275,11 +278,11 @@ export default {
 
 
       //用户证件类型选项
-      idTypeList: selectdata.idTypeList,
+      idTypeList: idTypeList,
       //用户角色选项
-      roleList: selectdata.roleList,
+      userRoleList: userRoleList,
       //用户账号状态选项
-      stateList: selectdata.stateList,
+      userStateList: userStateList,
 
 
     }

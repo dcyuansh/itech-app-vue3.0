@@ -1,0 +1,14 @@
+[
+  {
+    "value": "Request",
+    "name": "Request"
+  },
+  {
+    "value": "Change Request",
+    "name": "CR"
+  },
+  {
+    "value": "Defect",
+    "name": "Defect"
+  }
+]
