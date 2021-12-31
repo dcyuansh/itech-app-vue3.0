@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "start": "vite --mode production",
+    "build": "vite build",
+    "build:stage": "vite build --mode staging",
+    "build:env": "vite build --mode development"
   },
   "dependencies": {
     "axios": "^0.21.1",
